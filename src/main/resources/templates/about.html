@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width initial-scale=1.0">
+    <title>关于我</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{css/me.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padding-pd-mini m-shadow-small animated fadeInUp">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu ">
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="m-item active item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <div class="right m-item item m-mobile-hide">
+                <div class="ui icon inverted input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间部分-->
+<div class="m-padding-tb-aboutPage m-container-small ">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <div class="ten wide column animated fadeInLeft">
+                <div class="ui center aligned segment">
+                    <img src="../static/images/aboutme2.jpeg " th:src="@{/images/aboutme2.jpeg}"height="300" width="400" alt="" class="ui centered rounded image">
+                </div>
+            </div>
+            <div class="six wide column animated fadeInRight">
+                <div class="ui top attached segment">
+                    <div class="ui header">关于我</div>
+                </div>
+                <div class="ui attached segment">
+                    <p>我真诚地喜欢你，想带你去看每年故宫的初雪，阿拉斯加的海岸线，我愿意与你两人独占一江秋，愿意与你郡亭枕上看潮头，铺着红地毯的礼堂，暮霭沉沉的原野，我都愿与你共享，我想象过和你一起生活，直到白发苍苍垂垂老矣，同枕共穴，至死不休</p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny" >编程</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">爱情</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">运动</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">mysql</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="https://github.com/sherlockvarious" target="_blank" class="ui github circular icon button " data-content="sherlockvarious"><i class="github icon"></i></a>
+                    <a href="" class="ui wechat circular icon button "><i class="wechat icon"></i></a>
+                    <a href="" class="ui qq circular icon button " ><i class="qq icon"></i></a>
+                </div>
+                <div class="ui wechatQR flowing popup transition hidden">
+                    <img src="../static/images/wechatQRcode.png"  th:src="@{/images/wechatQRcode.png}" style="width: 100px" alt="" class="ui rounded image">
+                </div>
+
+                <div class="ui qqQR flowing popup transition hidden">
+                    <img src="../static/images/qqQR.png" th:src="@{/images/qqQR.png}" style="width: 100px" alt="" class="ui rounded image">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--底部footer-->
+<footer th:replace="_fragments :: footer " class="ui inverted vertical segment m-padding-tb-massive animated zoomIn">
+    <div class="ui center aligned container ">
+        <div class="ui divided inverted stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/images/wechatQRcode.png" th:src="@{/images/wechatQRcode.png}"class="ui rounded image" alt=""
+                             style="width: 120px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">联系我</h4>
+                <div class="ui inverted link list">
+                    <p>Email:2737793330@qq.com</p>
+                    <p>QQ:2737793330</p>
+                </div>
+            </div>
+
+            <div class="seven wide column">
+                <h4 class="ui inverted header ">关于我</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">
+                    我真诚地喜欢你，想带你去看每年故宫的初雪，阿拉斯加的海岸线，我愿意与你两人独占一江秋，愿意与你郡亭枕上看潮头，铺着红地毯的礼堂，暮霭沉沉的原野，我都愿与你共享，我想象过和你一起生活，直到白发苍苍垂垂老矣，同枕共穴，至死不休。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright© 2020 Designed by SherlockVarious</p>
+    </div>
+
+
+</footer>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({})
+
+    ;
+
+    $('.github').popup();
+    $('.qq').popup({
+        popup: $('.qqQR.popup'),
+        position: 'bottom center'
+    });
+
+    $('.wechat').popup({
+        popup: $('.wechatQR.popup'),
+        position: 'bottom center'
+    });
+</script>
+</body>
+</html>

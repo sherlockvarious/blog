@@ -1,0 +1,57 @@
+
+spring:
+  mvc:
+    format:
+      date: yyyy-MM-dd
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: sunchao20000229
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+
+  #Mailbox Settings
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2089105070@qq.com
+    password: fuzlmcekuzmefbjf
+    test-connection: true
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.socketFactory.fallback: true
+      mail.smtp.starttls.enable: true
+
+
+    jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
+
+
+logging:
+  level:
+    root: warn
+    com.SherlockVarious.blog: info
+  file:
+
+    name: log/blog-pro.log
+
+
+server:
+  port: 8081
+
+

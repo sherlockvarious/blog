@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <title>登录</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
+    <link rel="stylesheet" href="../../static/lib/materialize/css/materialize.css" th:href="@{/lib/materialize/css/materialize.css}">
+    <script type="text/javascript" src="../../static/lib/jquery/jquery.js" th:src="@{/lib/jquery/jquery.js}"></script>
+    <!--materialize js-->
+    <script src="../../static/lib/materialize/js/materialize.js" th:src="@{/lib/materialize/js/materialize.js}"></script>
+    <script src="../../static/lib/layer/layer.js" th:src="@{/lib/layer/layer.js}"></script>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            color: #404d5b;
+        }
+
+        .margin {
+            margin: 0 !important;
+        }
+
+        .card-panel {
+            min-width: 350px;
+        }
+    </style>
+</head>
+<body class="blue lighten-4">
+<div id="login-page" class="row">
+    <div class="col s12 z-depth-6 card-panel">
+        <form class="login-form" method="post" action="@{/login/user}">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <p class="center login-form-text">登录</p>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <input class="validate" id="email" type="email">
+                    <label for="email" data-error="邮箱格式错误" class="left-align" >邮箱</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <input id="password" type="password">
+                    <label for="password" class="center-align">密码</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12" id="btnLogin">
+                    <a class="btn waves-effect waves-light col s12">登　录</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin medium-small"><a href="register.html">现在注册!</a></p>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin right-align medium-small"><a href="forgot-password.html">忘记密码?</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+<script>
+    $("#btnLogin").click(function () {
+        if ($("#email").val() == "") {
+            layer.msg("邮箱不能为空", {time: 1000});
+        } else if ($("#password").val() == "") {
+            layer.msg("请输入密码", {time: 1000});
+        } else {
+            $.ajax({
+                url: "/login/user",
+                type: "post",
+                data: {
+                    email: $("#email").val(),
+                    password: $("#password").val()
+                },
+                success: function (data) {
+                    console.log(data.success);
+                    if (data.success === true) {
+                        layer.msg("登陆成功", {time: 1000});
+                        localStorage.setItem("id",data.data.id);
+                        localStorage.setItem("nickName",data.data.nickName);
+                        console.log(data.data.id);
+                        console.log(data.data.nickName);
+                        setTimeout(function () {
+                            //todo 登陆成功跳转
+                            window.location.href = '../index.html';
+                        }, 500);
+                    } else {
+                        layer.msg(data.message, {time: 1000});
+                    }
+                }
+            });
+        }
+    })
+</script>
+</html>

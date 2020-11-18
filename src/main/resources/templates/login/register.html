@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+	
+	<title>注册</title>
+	<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
+	<link rel="stylesheet" href="../../static/lib/materialize/css/materialize.css" th:href="@{/lib/materialize/css/materialize.css}">
+	<script type="text/javascript" src="../../static/lib/jquery/jquery.js" th:src="@{/lib/jquery/jquery.js}"></script>
+	<!--materialize js-->
+	<script src="../../static/lib/materialize/js/materialize.js" th:src="@{/lib/materialize/js/materialize.js}"></script>
+	<script src="../../static/lib/layer/layer.js" th:src="@{/lib/layer/layer.js}"></script>
+	<style type="text/css">
+	html,
+	body {
+	    height: 100%;
+	}
+	html {
+	    display: table;
+	    margin: auto;
+	}
+	body {
+	    display: table-cell;
+	    vertical-align: middle;
+		color:#404d5b;
+	}
+	.margin {
+	  margin: 0 !important;
+	}
+	.card-panel{ min-width:350px;}
+	</style>
+</head>
+<body class="blue lighten-4">
+	<div id="login-page" class="row">
+	    <div class="col s12 z-depth-6 card-panel">
+	      <form class="login-form">
+	        <div class="row">
+	          <div class="input-field col s12 center">
+	            <p class="center login-form-text">注册</p>
+	          </div>
+	        </div>
+	        <div class="row margin">
+	          <div class="input-field col s12">
+	            <input id="nickName" type="text" class="validate">
+	            <label for="nickName" class="left-align">用户名</label>
+	          </div>
+	        </div>
+	        <div class="row margin">
+	          <div class="input-field col s12">
+	            <input id="email" type="email" class="validate">
+	            <label for="email" class="left-align">邮箱</label>
+	          </div>
+			</div>
+			  <div class="row margin">
+				  <div class="input-field col s6">
+					  <input id="checksum" type="text" class="validate">
+					  <label for="checksum">验证码</label>
+				  </div>
+				  <div class="input-field col s6" id="btnChecksum">
+					  <a id="getChecksum" class="waves-effect waves-light btn">获取验证码</a>
+				  </div>
+			  </div>
+	        <div class="row margin">
+	          <div class="input-field col s12">
+	            <input id="password" type="password" class="validate">
+	            <label for="password">密码</label>
+	          </div>
+	        </div>
+	        <div class="row margin">
+	          <div class="input-field col s12">
+	            <input id="password-again" type="password">
+	            <label for="password-again">再次输入密码</label>
+	          </div>
+	        </div>
+	        <div class="row">
+	          <div class="input-field col s12" id="btnRegister">
+	            <a class="btn waves-effect waves-light col s12">立刻注册</a>
+	          </div>
+	          <div class="input-field col s12">
+	            <p class="margin center medium-small sign-up">已经有了账号? <a href="login.html">登录</a></p>
+	          </div>
+	        </div>
+	      </form>
+	    </div>
+	  </div>
+</body>
+<script>
+	var wait=60;
+	var emailRight = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var nameLength = 25;
+	var passwordLength = 16;
+	var checksum;
+	function time() {
+		if (wait == 0) {
+			$("#getChecksum").addClass("waves-light", "waves-effect" );
+			$("#getChecksum").removeClass("disabled");
+			$("#getChecksum").text("获取验证码");
+			wait = 60;
+		} else {
+			$("#getChecksum").removeClass("waves-light", "waves-effect" );
+			$("#getChecksum").addClass("disabled");
+			$("#getChecksum").text("重新发送(" + wait + ")");
+			wait--;
+			setTimeout(function() {
+				time()
+			},   1000)
+		}
+	}
+	//获取验证码
+	$("#btnChecksum").click(function(){
+		if(emailRight.test($("#email").val())){
+			$.ajax({
+				url:  "/login/sendRegisterVerificationCode",
+				type: "post",
+				data: {
+					email:$("#email").val()
+				},
+				success: function(data){
+					if( data[0].toString()=== '200'){
+						checksum=data[1].toString();
+						layer.msg("验证码已发送",{time:1000});
+						time()
+					}else{
+						layer.msg(data.toString(),{time:1000});
+					}
+				}
+			});
+		}else{
+			layer.msg("邮箱格式不正确",{time:1000});
+		}
+	});
+	//注册
+	$("#btnRegister").click(function(){
+		if($("#nickName").val() == ""){
+			layer.msg("请输入用户名",{time:1000});
+		}else if($("#nickName").val().length > nameLength){
+			layer.msg("用户名长度大于25字符，请修改",{time:1000});
+		}else if($("#email").val() == ""){
+			layer.msg("邮箱不能为空",{time:1000});
+		}else if($("#checksum").val() == ""){
+			layer.msg("请输入验证码",{time:1000});
+		}else if($("#checksum").val() != checksum ){
+			layer.msg("验证码错误",{time:1000});
+		}else if($("#password").val() == ""){
+			layer.msg("请输入密码",{time:1000});
+		}else if($("#password").val().length > passwordLength){
+			layer.msg("密码长度大于16字符，请修改",{time:1000});
+		}else if($("#password").val() != $("#password-again").val()){
+			layer.msg("两次密码不一致，请确认",{time:1000});
+		}else{
+			$.ajax({
+				url:"/login/register",
+				type: "post",
+				data: {
+					nickName:$("#nickName").val(),
+					email:$("#email").val(),
+					password:$("#password").val()
+				},
+				success: function(data){
+					if(data.toString()=== '200'){
+						layer.msg("成功注册",{time:1000});
+						setTimeout(function(){ window.location.href='login.html';}, 2500);
+					}else{
+						layer.msg(data.toString(),{time:1000});
+					}
+				}
+			});
+		}
+	});
+
+</script>
+</html>
