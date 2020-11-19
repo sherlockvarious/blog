@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface TypeService {
 
-    public PageInfo<Type> listType( int pageNo, int pageSize);
+    PageInfo<Type> listType( int pageNo, int pageSize);
 
     boolean deleteById(int id);
 
     boolean add(Type type);
+
+    boolean ifHas(Type type);
 }

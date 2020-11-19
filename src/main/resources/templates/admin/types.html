@@ -67,17 +67,16 @@
                 </tr>
             </thead>
             <tbody>
-            <tr th:each=" pageInfo : ${pageInfo.list}">
-                <td th:text="${pageInfo.id}"></td>
+            <tr th:each="pageInfo : ${pageInfo.list}">
+                <td th:text="${pageInfoStat.index+1}"></td>
                 <td th:text="${pageInfo.name}"></td>
                 <td>
-                    <a href="@{/admin/types/input}"  class="ui mini teal button">编辑</a>
-                    <a href="@{/admin/types/delete/{id}(id=${pageInfo.id})}" onclick="return confirm('您确定要删除吗？')" class="ui mini red button">删除</a>
+                    <a th:href="@{/admin/types/input}"  class="ui mini teal button">编辑</a>
+                    <a th:href="@{/admin/types/delete(id=${pageInfo.id})}" onclick="return confirm('您确定要删除吗？')" class="ui mini red button">删除</a>
                 </td>
             </tr>   
             </tbody>
             <tfoot>
-            <!--显示分页信息-->
                 <tr>
                     <th colspan="7">
                         <div class="ui mini pagination menu"  >
@@ -145,18 +144,25 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
 <script src="../../static/lib/layui/layui.js" th:src="@{/lib/layui/layui.js}"></script>
+
+
+<script th:inline="javascript">
+    var message = [[${pageInfo}]];
+    console.log(message);
+</script>
 <script>
 
+    var i = 1;
 
-
-
-
-    layui.use('layer', function(){
-        var layer = layui.layer;
-        layer.msg("[[${message}]]", {
-            time: 2000,
+    if ("[[${message}]]"!=""){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg("[[${message}]]", {
+                time: 2000,
+            });
         });
-    });
+    }
+
 
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');

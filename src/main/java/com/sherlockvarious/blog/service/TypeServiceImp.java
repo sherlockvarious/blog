@@ -47,4 +47,12 @@ public class TypeServiceImp implements TypeService{
         }
         return false;
     }
+
+    @Override
+    public boolean ifHas(Type type) {
+        TypeExample example = new TypeExample();
+        example.createCriteria().andNameEqualTo(type.getName());
+
+        return  (typeMapper.selectByExample(example).size()==0);
+    }
 }
