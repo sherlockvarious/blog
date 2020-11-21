@@ -17,7 +17,7 @@ import java.util.List;
  * @created at 2020-11-14-16:32
  */
 @Service
-public class TypeServiceImp implements TypeService{
+public class TypeServiceImp implements TypeService {
 
     @Resource
     TypeMapper typeMapper;
@@ -34,7 +34,7 @@ public class TypeServiceImp implements TypeService{
 
     @Override
     public boolean deleteById(int id) {
-        if(typeMapper.deleteByPrimaryKey(id)==1){
+        if (typeMapper.deleteByPrimaryKey(id) == 1) {
             return true;
         }
         return false;
@@ -42,7 +42,7 @@ public class TypeServiceImp implements TypeService{
 
     @Override
     public boolean add(Type type) {
-        if(typeMapper.insertSelective(type)==1){
+        if (typeMapper.insertSelective(type) == 1) {
             return true;
         }
         return false;
@@ -53,6 +53,20 @@ public class TypeServiceImp implements TypeService{
         TypeExample example = new TypeExample();
         example.createCriteria().andNameEqualTo(type.getName());
 
-        return  (typeMapper.selectByExample(example).size()==0);
+        return (typeMapper.selectByExample(example).size() == 0);
+    }
+
+    @Override
+    public Type selectById(int id) {
+        return typeMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public boolean edit(Type type) {
+        if (typeMapper.updateByPrimaryKey(type) == 1) {
+            return true;
+        }
+
+        return false;
     }
 }

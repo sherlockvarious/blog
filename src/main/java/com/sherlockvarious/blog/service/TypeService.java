@@ -19,4 +19,8 @@ public interface TypeService {
     boolean add(Type type);
 
     boolean ifHas(Type type);
+
+    Type selectById(int id);
+
+    boolean edit(Type type);
 }

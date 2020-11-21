@@ -1,21 +1,15 @@
 package com.sherlockvarious.blog.Controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sherlockvarious.blog.dao.TypeMapper;
 import com.sherlockvarious.blog.entity.Type;
-import com.sherlockvarious.blog.entity.TypeExample;
 import com.sherlockvarious.blog.service.TypeService;
-
-import com.sherlockvarious.blog.utils.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.Valid;
+
 
 /**
  * @author sunchao
@@ -27,9 +21,14 @@ public class TypesController {
     @Resource
     TypeService typeService;
 
-    @Resource
-    TypeMapper typeMapper;
 
+
+    @RequestMapping("/admin/types/input/{id}")
+    public String toEditType(@PathVariable int id,Model model){
+        model.addAttribute("type", typeService.selectById(id));
+        return "admin/type-publish";
+
+    }
     @GetMapping("/page/admin/types")
     public String types(@RequestParam(defaultValue = "1") int pageNum,
                         @RequestParam(defaultValue = "10") int pageSize,
@@ -44,11 +43,13 @@ public class TypesController {
         return "admin/types";
     }
 
+
+
     @PostMapping("/admin/types")
-    public String publishType(Type type, RedirectAttributes attributes)  {
+    public String publishType(Type type, RedirectAttributes attributes,Model model){
         if (!typeService.ifHas(type)){
-            attributes.addFlashAttribute("message", "该标签已存在");
-            return "redirect:/page/admin/type-publish";
+            model.addAttribute("message", "该标签已存在");
+            return "admin/type-publish";
         }
 
         if (typeService.add(type)) {
@@ -60,13 +61,30 @@ public class TypesController {
      return "redirect:/page/admin/types";
     }
 
-    @RequestMapping("/admin/types/delete")
-    public String delete(@RequestParam int id,  RedirectAttributes attributes) {
+
+    @PostMapping("/admin/types/{id}")
+    public String editType(@Valid Type type,@PathVariable int id, RedirectAttributes attributes,Model model)  {
+
+        if (!typeService.ifHas(type)){
+            model.addAttribute("message", "不能重复添加标签");
+            return "admin/type-publish";
+        }
+
+        if (typeService.edit(type)) {
+            attributes.addFlashAttribute("message", "修改成功");
+        } else {
+            attributes.addFlashAttribute("message", "修改失败");
+        }
+
+        return "redirect:/page/admin/types";
+    }
+    @RequestMapping("/admin/types/delete/{id}")
+    public String delete(@PathVariable int id,  Model model) {
 
         if (typeService.deleteById(id) == true) {
-           attributes.addFlashAttribute("message", "删除成功");
+           model.addAttribute("message", "删除成功");
         } else {
-            attributes.addFlashAttribute("message", "删除失败");
+           model.addAttribute("message", "删除失败");
         }
 
         return "redirect:/page/admin/types";

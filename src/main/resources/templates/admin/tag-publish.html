@@ -11,13 +11,13 @@
 <body>
 
 <!--导航-->
-<nav  th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padding-pd-mini m-shadow-small animated fadeInDown">
+<nav  th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment m-padding-pd-mini m-shadow-small animated fadeInDown">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu ">
             <h2 class="ui teal header item">管理后台</h2>
             <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide active"><i class="idea icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide active"><i class="tags icon"></i>标签</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
             <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
             <div class="right m-mobile-hide menu">
@@ -51,8 +51,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" th:href="@{/page/admin/type-publish}" class="teal  active item">发布&nbsp;<i class="edit outline icon"></i></a>
-            <a href="#" th:href="@{/page/admin/types}" class="teal item">列表&nbsp;<i class="list icon"></i></a>
+            <a href="#" th:href="@{/page/admin/tag-publish}" class="teal  active item">发布&nbsp;<i class="edit outline icon"></i></a>
+            <a href="#" th:href="@{/page/admin/tags}" class="teal item">列表&nbsp;<i class="list icon"></i></a>
         </div>
     </div>
 </div>
@@ -65,12 +65,12 @@
 <!--中间部分-->
 <div class="m-padding-tb-large m-container-small">
     <div class="ui container">
-        <form action="#" method="post" th:object="${type}"  th:action="${type?.id} ? @{/admin/types/{id}(id=*{id})} : @{/admin/types}" class="ui form">
-            <input type="hidden" name="id" th:value="${type!=null ?type.id:''}">
+        <form action="#" method="post" th:object="${tag}"  th:action="${tag?.id} ? @{/admin/tags/{id}(id=*{id})} : @{/admin/tags}" class="ui form">
+            <input type="hidden" name="id" th:value="${tag!=null ?tag.id:''}">
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name"   th:value="${type?.name} ? *{name} : '' " placeholder="分类名称" required="required">
+                    <input type="text" name="name"   th:value="${tag?.name} ? *{name} : '' " placeholder="分类名称" required="required">
                 </div>
             </div>
 

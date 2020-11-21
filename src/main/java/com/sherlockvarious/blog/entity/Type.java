@@ -10,6 +10,9 @@ public class Type {
         this.name = name;
     }
 
+    public Type() {
+    }
+
     public Integer getId() {
         return id;
     }
