@@ -226,7 +226,7 @@
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
-            path    : "../../static/lib/editormd/lib/"
+            path    : "/lib/editormd/lib/"
         });
     });
     $('.menu.toggle').click(function () {
@@ -235,17 +235,7 @@
 
     $('.ui.dropdown').dropdown({});
 
-    $('.ui.form').form({
-        fields:{
-            title:{
-                identifier:'title',
-                rules:[{
-                    type:'empty',
-                    prompt:'请输入博客标题'
-                }]
-            }
-        }
-    });
+
 
 </script>
 </body>

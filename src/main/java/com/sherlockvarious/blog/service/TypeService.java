@@ -5,6 +5,8 @@ import com.sherlockvarious.blog.entity.Type;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @author sunchao
  * @created at 2020-11-14-16:31
@@ -23,4 +25,6 @@ public interface TypeService {
     Type selectById(int id);
 
     boolean edit(Type type);
+
+    List<Type> listAllType();
 }

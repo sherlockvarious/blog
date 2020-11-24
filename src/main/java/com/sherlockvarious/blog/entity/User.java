@@ -21,6 +21,10 @@ public class User {
 
     private Date updateTime;
 
+    private String nickname;
+
+    private String username;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +95,21 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 }

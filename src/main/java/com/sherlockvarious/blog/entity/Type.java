@@ -5,14 +5,6 @@ public class Type {
 
     private String name;
 
-    public Type(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Type() {
-    }
-
     public Integer getId() {
         return id;
     }

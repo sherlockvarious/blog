@@ -11,6 +11,7 @@
     <result column="blog_id" jdbcType="INTEGER" property="blogId" />
     <result column="parent_comment_id" jdbcType="INTEGER" property="parentCommentId" />
     <result column="admin_comment" jdbcType="BIT" property="adminComment" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nick_name, email, content, avatar, create_time, blog_id, parent_comment_id, admin_comment
+    id, nick_name, email, content, avatar, create_time, blog_id, parent_comment_id, admin_comment, 
+    nickname
   </sql>
   <select id="selectByExample" parameterType="com.sherlockvarious.blog.entity.CommentExample" resultMap="BaseResultMap">
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.sherlockvarious.blog.entity.Comment">
     insert into t_comment (id, nick_name, email, 
       content, avatar, create_time, 
-      blog_id, parent_comment_id, admin_comment
-      )
+      blog_id, parent_comment_id, admin_comment, 
+      nickname)
     values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
-      #{blogId,jdbcType=INTEGER}, #{parentCommentId,jdbcType=INTEGER}, #{adminComment,jdbcType=BIT}
-      )
+      #{blogId,jdbcType=INTEGER}, #{parentCommentId,jdbcType=INTEGER}, #{adminComment,jdbcType=BIT}, 
+      #{nickname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sherlockvarious.blog.entity.Comment">
     insert into t_comment
@@ -143,6 +145,9 @@
       <if test="adminComment != null">
         admin_comment,
       </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -171,6 +176,9 @@
       </if>
       <if test="adminComment != null">
         #{adminComment,jdbcType=BIT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -210,6 +218,9 @@
       <if test="record.adminComment != null">
         admin_comment = #{record.adminComment,jdbcType=BIT},
       </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +236,8 @@
       create_time = #{record.createTime,jdbcType=DATE},
       blog_id = #{record.blogId,jdbcType=INTEGER},
       parent_comment_id = #{record.parentCommentId,jdbcType=INTEGER},
-      admin_comment = #{record.adminComment,jdbcType=BIT}
+      admin_comment = #{record.adminComment,jdbcType=BIT},
+      nickname = #{record.nickname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +269,9 @@
       <if test="adminComment != null">
         admin_comment = #{adminComment,jdbcType=BIT},
       </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -269,7 +284,8 @@
       create_time = #{createTime,jdbcType=DATE},
       blog_id = #{blogId,jdbcType=INTEGER},
       parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
-      admin_comment = #{adminComment,jdbcType=BIT}
+      admin_comment = #{adminComment,jdbcType=BIT},
+      nickname = #{nickname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

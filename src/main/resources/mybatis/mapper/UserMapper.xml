@@ -11,6 +11,8 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nick_name, user_name, password, email, avatar, type, create_time, update_time
+    id, nick_name, user_name, password, email, avatar, type, create_time, update_time, 
+    nickname, username
   </sql>
   <select id="selectByExample" parameterType="com.sherlockvarious.blog.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -106,12 +109,12 @@
   <insert id="insert" parameterType="com.sherlockvarious.blog.entity.User">
     insert into t_user (id, nick_name, user_name, 
       password, email, avatar, 
-      type, create_time, update_time
-      )
+      type, create_time, update_time, 
+      nickname, username)
     values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{nickname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sherlockvarious.blog.entity.User">
     insert into t_user
@@ -143,6 +146,12 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -171,6 +180,12 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -210,6 +225,12 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +246,9 @@
       avatar = #{record.avatar,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +280,12 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -269,7 +298,9 @@
       avatar = #{avatar,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -21,6 +21,8 @@ public class Comment {
 
     private Boolean adminComment;
 
+    private String nickname;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class Comment {
 
     public void setAdminComment(Boolean adminComment) {
         this.adminComment = adminComment;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 }

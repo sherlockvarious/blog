@@ -8,6 +8,9 @@ spring:
   profiles:
     active: dev
 
+#mybatis
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
 
 debug: true
 

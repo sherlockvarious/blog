@@ -69,4 +69,12 @@ public class TypeServiceImp implements TypeService {
 
         return false;
     }
+
+    @Override
+    public List<Type> listAllType() {
+
+        TypeExample example = new TypeExample();
+        example.createCriteria();
+        return typeMapper.selectByExample(example);
+    }
 }
