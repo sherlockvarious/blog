@@ -31,11 +31,11 @@ public class Blog {
 
     private Integer typeId;
 
-    private Long userId;
+    private Integer userId;
 
     private String content;
 
-    private  Type type;
+    private Type type;
 
     public Type getType() {
         return type;
@@ -157,11 +157,11 @@ public class Blog {
         this.typeId = typeId;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

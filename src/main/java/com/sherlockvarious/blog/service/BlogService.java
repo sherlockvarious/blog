@@ -12,4 +12,8 @@ public interface BlogService {
     PageInfo<Blog> listBlog(int pageNum, int pageSize);
 
     PageInfo<Blog> listConditionalBlog(int pageNum, int pageSize,Blog blog);
+
+    boolean deleteById(int id);
+
+    boolean saveNewBlog(Blog blog);
 }

@@ -34,9 +34,14 @@ public class TypeServiceImp implements TypeService {
 
     @Override
     public boolean deleteById(int id) {
-        if (typeMapper.deleteByPrimaryKey(id) == 1) {
-            return true;
+        try {
+            if (typeMapper.deleteByPrimaryKey(id) == 1) {
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         return false;
     }
 

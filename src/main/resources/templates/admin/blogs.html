@@ -110,12 +110,13 @@
                 <tr th:each="pageInfo : ${pageInfo.list}">
                     <td th:text="${pageInfoStat.index+1}"></td>
                     <td th:text="${pageInfo.title}"></td>
-                    <td th:text="${pageInfo.type.name}">爱情</td>
-                    <td th:text="${pageInfo.published} ? '发布':'草稿'">草稿</td>
-                    <td th:text="${pageInfo.updateTime}"></td>
+                    <td th:text="${pageInfo.type.name}"></td>
+                    <td th:text="${pageInfo.published} ? '发布':'草稿'"></td>
+                    <td th:text="${pageInfo.updateTime} ? *{#dates.format(pageInfo.updateTime,'yyyy-MM-dd HH:mm:ss')} : *{#dates.format(pageInfo.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+
                     <td>
                         <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="@{admin/blog/delete/{id}(id=${pageInfo.id})}" class="ui mini red button">删除</a>
+                        <a href="#" th:href="@{/admin/blogs/delete/{id}(id=${pageInfo.id})}" class="ui mini red button">删除</a>
                     </td>
                 </tr>
 
@@ -192,11 +193,22 @@
 
 </footer>
 
-<script src="../../static/lib/layer/layer.js" th:src="@{/lib/layer/layer.js}"></script>
+
+<script src="../../static/lib/layui/layui.js" th:src="@{/lib/layui/layui.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
 <script>
+
+    if ("[[${message}]]"!=""){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.msg("[[${message}]]", {
+                time: 2000,
+            });
+        });
+    }
+
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });

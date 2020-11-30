@@ -39,7 +39,6 @@ public class TypesController {
 
         model.addAttribute("pageInfo", pageInfo);
 
-        System.out.println(pageInfo.getList().size());
         return "admin/types";
     }
 
@@ -79,12 +78,12 @@ public class TypesController {
         return "redirect:/page/admin/types";
     }
     @RequestMapping("/admin/types/delete/{id}")
-    public String delete(@PathVariable int id,  Model model) {
+    public String delete(@PathVariable int id,  RedirectAttributes attributes) {
 
         if (typeService.deleteById(id) == true) {
-           model.addAttribute("message", "删除成功");
+            attributes.addFlashAttribute("message", "删除成功");
         } else {
-           model.addAttribute("message", "删除失败");
+            attributes.addFlashAttribute("message", "删除失败");
         }
 
         return "redirect:/page/admin/types";

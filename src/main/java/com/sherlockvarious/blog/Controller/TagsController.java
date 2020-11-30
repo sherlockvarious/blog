@@ -79,12 +79,12 @@ public class TagsController {
         return "redirect:/page/admin/tags";
     }
     @RequestMapping("/admin/tags/delete/{id}")
-    public String delete(@PathVariable int id,  Model model) {
+    public String delete(@PathVariable int id,  RedirectAttributes attributes) {
 
         if (tagService.deleteById(id) == true) {
-            model.addAttribute("message", "删除成功");
+            attributes.addFlashAttribute("message", "删除成功");
         } else {
-            model.addAttribute("message", "删除失败");
+            attributes.addFlashAttribute("message", "删除失败");
         }
 
         return "redirect:/page/admin/tags";

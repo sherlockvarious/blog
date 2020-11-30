@@ -68,4 +68,12 @@ public class TagServiceImp implements TagService{
 
         return false;
     }
+
+    @Override
+    public List<Tag> listAllTags() {
+
+        TagExample example = new TagExample();
+        example.createCriteria();
+        return TagMapper.selectByExample(example);
+    }
 }

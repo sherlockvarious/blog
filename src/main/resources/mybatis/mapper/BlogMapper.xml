@@ -16,7 +16,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="views" jdbcType="INTEGER" property="views" />
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sherlockvarious.blog.entity.Blog">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -134,7 +134,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sherlockvarious.blog.entity.Blog">
+  <insert id="insert" parameterType="com.sherlockvarious.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
     insert into t_blog (id, appreciation, commentabled, 
       create_time, description, first_picture, 
       flag, published, recommend, 
@@ -145,10 +145,10 @@
       #{createTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, #{firstPicture,jdbcType=VARCHAR}, 
       #{flag,jdbcType=VARCHAR}, #{published,jdbcType=BIT}, #{recommend,jdbcType=BIT}, 
       #{shareStatement,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{views,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, 
+      #{views,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sherlockvarious.blog.entity.Blog">
+  <insert id="insertSelective" parameterType="com.sherlockvarious.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
     insert into t_blog
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -244,7 +244,7 @@
         #{typeId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -303,7 +303,7 @@
         type_id = #{record.typeId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
@@ -329,7 +329,7 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       views = #{record.views,jdbcType=INTEGER},
       type_id = #{record.typeId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -351,7 +351,7 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       views = #{record.views,jdbcType=INTEGER},
       type_id = #{record.typeId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=BIGINT}
+      user_id = #{record.userId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -399,7 +399,7 @@
         type_id = #{typeId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
@@ -422,7 +422,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       views = #{views,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -441,7 +441,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       views = #{views,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=BIGINT}
+      user_id = #{userId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

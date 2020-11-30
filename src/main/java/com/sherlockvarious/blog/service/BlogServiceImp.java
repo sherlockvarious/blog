@@ -8,6 +8,7 @@ import com.sherlockvarious.blog.entity.BlogExample;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,6 +24,33 @@ public class BlogServiceImp implements BlogService{
 
     @Resource
     TypeService typeService;
+
+
+    @Override
+    public boolean deleteById(int id) {
+        return blogMapper.deleteByPrimaryKey(id)==1;
+    }
+
+    @Override
+    public boolean saveNewBlog(Blog blog) {
+
+        try {
+            //设置文章创建时间
+            blog.setCreateTime(new Date());
+            //设置初始访问量为 0
+            blog.setViews(0);
+            blogMapper.insertSelective(blog);
+
+            System.out.println(blog.getId());
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+
+
+    }
 
     @Override
     public PageInfo<Blog> listConditionalBlog(int pageNum, int pageSize,Blog blog) {

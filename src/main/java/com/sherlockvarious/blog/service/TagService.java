@@ -3,6 +3,8 @@ package com.sherlockvarious.blog.service;
 import com.github.pagehelper.PageInfo;
 import com.sherlockvarious.blog.entity.Tag;
 
+import java.util.List;
+
 /**
  * @author sunchao
  * @created at 2020-11-21-8:43
@@ -20,6 +22,8 @@ public interface TagService {
     Tag selectById(int id);
 
     boolean edit(Tag tag);
+
+    List<Tag> listAllTags();
 }
 
 
