@@ -1,5 +1,7 @@
 package com.sherlockvarious.blog.entity;
 
+import javax.persistence.Basic;
+import javax.persistence.FetchType;
 import java.util.Date;
 
 public class Blog {
@@ -34,6 +36,16 @@ public class Blog {
     private Integer userId;
 
     private String content;
+
+    private String tagIds;
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
+    }
 
     private Type type;
 

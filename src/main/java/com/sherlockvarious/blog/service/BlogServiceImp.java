@@ -5,9 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.sherlockvarious.blog.dao.BlogMapper;
 import com.sherlockvarious.blog.entity.Blog;
 import com.sherlockvarious.blog.entity.BlogExample;
+import com.sherlockvarious.blog.entity.Blog_Tags;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
  * @created at 2020-11-16-20:24
  */
 @Service
-public class BlogServiceImp implements BlogService{
+public class BlogServiceImp implements BlogService {
 
     @Resource
     BlogMapper blogMapper;
@@ -25,12 +27,59 @@ public class BlogServiceImp implements BlogService{
     @Resource
     TypeService typeService;
 
+    @Resource
+    Blog_TagsService blog_tagsService;
+
 
     @Override
     public boolean deleteById(int id) {
-        return blogMapper.deleteByPrimaryKey(id)==1;
+        return blogMapper.deleteByPrimaryKey(id) == 1;
     }
 
+    @Override
+    public Blog getBlog(int id) {
+        return blogMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateBlog(Blog blog) {
+        viewCheckedOption(blog);
+        blogMapper.updateByPrimaryKeySelective(blog);
+    }
+
+    @Override
+    public String findTags(int id) {
+        ArrayList<Integer> tags = blog_tagsService.selectByBlogId(id);
+
+        StringBuffer tagIds = new StringBuffer();
+        for (Integer tag : tags) {
+            tagIds.append(tag);
+            tagIds.append(",");
+        }
+
+        if (tagIds.length() > 1) {
+            tagIds.delete(tagIds.length() - 1, tagIds.length());
+        }
+        return tagIds.toString();
+    }
+
+    public static void viewCheckedOption(Blog blog){
+        if (blog.getCommentabled()==null){
+            blog.setCommentabled(false);
+        }
+        if (blog.getAppreciation()==null){
+            blog.setAppreciation(false);
+        }
+        if (blog.getPublished()==null){
+            blog.setPublished(false);
+        }
+        if (blog.getRecommend()==null){
+            blog.setRecommend(false);
+        }
+        if (blog.getShareStatement()==null){
+            blog.setShareStatement(false);
+        }
+    }
     @Override
     public boolean saveNewBlog(Blog blog) {
 
@@ -39,28 +88,30 @@ public class BlogServiceImp implements BlogService{
             blog.setCreateTime(new Date());
             //设置初始访问量为 0
             blog.setViews(0);
+
+            viewCheckedOption(blog);
+
             blogMapper.insertSelective(blog);
 
             System.out.println(blog.getId());
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
 
 
-
     }
 
     @Override
-    public PageInfo<Blog> listConditionalBlog(int pageNum, int pageSize,Blog blog) {
+    public PageInfo<Blog> listConditionalBlog(int pageNum, int pageSize, Blog blog) {
         PageHelper.startPage(pageNum, pageSize);
         BlogExample example = new BlogExample();
 
-        if(blog.getTypeId()!=null&&blog.getTypeId()!=0){
-            example.createCriteria().andTitleLike("%"+blog.getTitle()+"%").andTypeIdEqualTo(blog.getTypeId());
-        }else {
-            example.createCriteria().andTitleLike("%"+blog.getTitle()+"%");
+        if (blog.getTypeId() != null && blog.getTypeId() != 0) {
+            example.createCriteria().andTitleLike("%" + blog.getTitle() + "%").andTypeIdEqualTo(blog.getTypeId());
+        } else {
+            example.createCriteria().andTitleLike("%" + blog.getTitle() + "%");
 
         }
 

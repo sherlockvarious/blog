@@ -2,7 +2,6 @@ package com.sherlockvarious.blog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sherlockvarious.blog.entity.Blog;
-import com.sherlockvarious.blog.entity.extend.BlogExtend;
 
 /**
  * @author sunchao
@@ -16,4 +15,10 @@ public interface BlogService {
     boolean deleteById(int id);
 
     boolean saveNewBlog(Blog blog);
+
+    Blog getBlog(int id);
+
+    void updateBlog(Blog blog);
+
+    String findTags(int id);
 }

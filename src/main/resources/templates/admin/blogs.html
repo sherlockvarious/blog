@@ -77,7 +77,7 @@
                         <i class="dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div  class="item" th:data-value=0>不选择种类
+                            <div  class="item" th:data-value=0>所有类型
                             </div>
                             <div th:each="type : ${types}" class="item" th:data-value="${type.id}"
                                  th:text="${type.name}">错误日志
@@ -115,8 +115,8 @@
                     <td th:text="${pageInfo.updateTime} ? *{#dates.format(pageInfo.updateTime,'yyyy-MM-dd HH:mm:ss')} : *{#dates.format(pageInfo.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
 
                     <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" th:href="@{/admin/blogs/delete/{id}(id=${pageInfo.id})}" class="ui mini red button">删除</a>
+                        <a href="#" th:href="@{/admin/blogs/edit/{id}(id=${pageInfo.id})}"class="ui mini teal button">编辑</a>
+                        <a href="#" th:href="@{/admin/blogs/delete/{id}(id=${pageInfo.id})}" onclick="return confirm('您确定要删除吗？')" class="ui mini red button">删除</a>
                     </td>
                 </tr>
 
@@ -199,6 +199,16 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
 <script>
+
+
+    //按enter键触发search button事件
+    document.onkeydown = function (e) {
+        if (!e) e = window.event;
+        if ((e.keyCode || e.which) == 13) {
+            var obtnLogin = document.getElementById("search-btn");  //submit_btn为按钮ID
+            obtnLogin.focus();　　　　　　　　　 fun();//提交按钮触发的方法
+        }
+    }
 
     if ("[[${message}]]"!=""){
         layui.use('layer', function(){

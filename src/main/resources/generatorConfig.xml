@@ -43,7 +43,7 @@
 <!--        <table tableName="t_tag" domainObjectName="Tag"></table>-->
 <!--        <table tableName="t_type" domainObjectName="Type"></table>-->
 <!--        <table tableName="t_user" domainObjectName="User"></table>-->
-        <table tableName="t_blog_tags" domainObjectName="Blog_Tags"></table>
+<!--        <table tableName="t_blog_tags" domainObjectName="Blog_Tags"></table>-->
 
        <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
               <property name="useActualColumnNames" value="true"/>
@@ -51,7 +51,7 @@
               <columnOverride column="DATE_FIELD" property="startDate" />
               <ignoreColumn column="FRED" />
               <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
-          </table>
+       </table>
 
     </context>
 </generatorConfiguration>
