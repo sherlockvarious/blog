@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface UserService {
 
+    public User selectById(Integer userId);
+
     //用户登录
     public User userLogin(User user);
 

@@ -27,4 +27,6 @@ public interface TypeService {
     boolean edit(Type type);
 
     List<Type> listAllType();
+
+    List<Type> listTypeByPopularity(int i);
 }

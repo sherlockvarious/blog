@@ -1,6 +1,8 @@
 package com.sherlockvarious.blog.entity;
 
-public class Tag {
+import com.sherlockvarious.blog.entity.extend.TagExtend;
+
+public class Tag extends TagExtend {
     private Integer id;
 
     private String name;

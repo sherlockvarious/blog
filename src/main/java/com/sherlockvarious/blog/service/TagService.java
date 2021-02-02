@@ -24,6 +24,10 @@ public interface TagService {
     boolean edit(Tag tag);
 
     List<Tag> listAllTags();
+
+    List<Tag> listTagByPopularity(int i);
+
+
 }
 
 

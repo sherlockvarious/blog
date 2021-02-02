@@ -3,6 +3,8 @@ package com.sherlockvarious.blog.service;
 import com.github.pagehelper.PageInfo;
 import com.sherlockvarious.blog.entity.Blog;
 
+import java.util.List;
+
 /**
  * @author sunchao
  * @created at 2020-11-16-20:24
@@ -21,4 +23,12 @@ public interface BlogService {
     void updateBlog(Blog blog);
 
     String findTags(int id);
+
+    List<Integer> listAllBlogTypeId();
+
+    List<Blog> listRecommendBlogs(int i);
+
+    PageInfo<Blog> listBlogByTypes(int pageNum, int pageSize, int id);
+
+    PageInfo<Blog>  listBlogByTags(int pageNum, int pageSize, int id);
 }

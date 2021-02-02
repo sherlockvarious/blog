@@ -1,11 +1,12 @@
 package com.sherlockvarious.blog.dao;
 
+import com.sherlockvarious.blog.dao.extend.BlogMapperExtend;
 import com.sherlockvarious.blog.entity.Blog;
 import com.sherlockvarious.blog.entity.BlogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface BlogMapper {
+public interface BlogMapper extends BlogMapperExtend {
     long countByExample(BlogExample example);
 
     int deleteByExample(BlogExample example);

@@ -1,9 +1,12 @@
 package com.sherlockvarious.blog.entity;
 
-public class Type {
+import com.sherlockvarious.blog.entity.extend.TypeExtend;
+
+public class Type extends TypeExtend {
     private Integer id;
 
     private String name;
+
 
     public Integer getId() {
         return id;

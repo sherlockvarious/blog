@@ -33,6 +33,11 @@ public class UserServiceImp implements UserService {
 
 
     @Override
+    public User selectById(Integer userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
     public List<String> sendVerificationCode(String email) {
 
         Random random = new Random();
