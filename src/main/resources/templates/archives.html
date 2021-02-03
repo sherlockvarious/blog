@@ -45,142 +45,38 @@
                     <h3 class="ui teal header">归档</h3>
                 </div>
                 <div class="column right aligned">
-                    共<h3 class="ui orange header m-inline-block">14</h3>篇博客
+                    共<h3 class="ui orange header m-inline-block"  th:text="${blogCount}">14</h3>篇博客
                 </div>
             </div>
         </div>
 
-<h2 class="ui teal center aligned header">2016</h2>
-        <div class="ui fluid vertical menu">
-            <a href="#" target="_blank" class="item">
+        <th:block th:each="item : ${archiveMap}">
+            <h2 class="ui teal center aligned header" th:text="${item.key}">2016</h2>
+            <div class="ui fluid vertical menu">
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item"th:each="blog : ${item.value}">
                 <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
+                   <span th:text="${blog.title}">关于刻意练习的清单</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal"th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月3号</div>
                 </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-            <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-        </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
+                <div class="ui basic orange left pointing label m-padding-mini m-text-normal" th:text="${blog.flag}">原创</div>
             </a>
         </div>
+        </th:block>
 
-        <h2 class="ui teal center aligned header">2015</h2>
-        <div class="ui fluid vertical menu">
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
 
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
+<!--        <th:block th:each="item : ${archiveMap}">-->
+<!--            <h3 class="ui center aligned header" th:text="${item.key}">2017</h3>-->
+<!--            <div class="ui fluid vertical menu">-->
+<!--                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">-->
+<!--          <span>-->
+<!--            <i class="mini teal circle icon"></i><span th:text="${blog.title}">关于刻意练习的清单</span>-->
+<!--            <div class="ui teal basic left pointing label m-padded-mini " th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月03</div>-->
+<!--          </span>-->
+<!--                    <div class="ui orange basic left pointing label m-padded-mini " th:text="${blog.flag}">原创</div>-->
+<!--                </a>-->
 
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-        </div>
-
-        <h2 class="ui teal center aligned header">2014</h2>
-        <div class="ui fluid vertical menu">
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-            <a href="#" target="_blank" class="item">
-                <span>
-                    我爱你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="ui basic teal left pointing label m-padding-mini m-text-normal">9月3号</div>
-                </span>
-                <div class="ui basic orange left pointing label m-padding-mini m-text-normal">原创</div>
-
-            </a>
-        </div>
+<!--            </div>-->
+<!--        </th:block>-->
 
 
     </div>

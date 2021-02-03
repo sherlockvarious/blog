@@ -7,9 +7,7 @@ import com.sherlockvarious.blog.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -262,5 +260,31 @@ public class BlogServiceImp implements BlogService {
         return new PageInfo<>(blogs);
 
 
+    }
+
+    @Override
+    public int countBlogs() {
+
+        BlogExample example = new BlogExample();
+        example.createCriteria();
+
+        return (int) blogMapper.countByExample(example);
+
+    }
+
+    @Override
+    public Map<Integer, List<Blog>> archiveBlog() {
+
+        //网站在2021年搭建 所以只需要从今年的一直往前查到2021年的。即可查完所有日期
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+
+        Map<Integer, List<Blog>> map = new HashMap<>();
+
+        for (int i =  2021 ; i <= year; i++) {
+            map.put(i, blogMapper.selectByYear(i));
+        }
+
+        return map;
     }
 }

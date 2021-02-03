@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.sherlockvarious.blog.entity.Blog;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author sunchao
@@ -31,4 +32,8 @@ public interface BlogService {
     PageInfo<Blog> listBlogByTypes(int pageNum, int pageSize, int id);
 
     PageInfo<Blog>  listBlogByTags(int pageNum, int pageSize, int id);
+
+    int countBlogs();
+
+    Map<Integer,List<Blog>> archiveBlog();
 }

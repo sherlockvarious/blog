@@ -41,6 +41,8 @@ public class BlogController {
     @Resource
     Blog_TagsService blog_tagsService;
 
+
+    //进入后台的博客首页
     @RequestMapping("/page/admin/blogs")
     public String blogs(@RequestParam(defaultValue = "1") int pageNum,
                         @RequestParam(defaultValue = "10") int pageSize,
@@ -53,6 +55,8 @@ public class BlogController {
         return "admin/blogs";
     }
 
+
+    //发布新博客
     @RequestMapping("/admin/blog/publish")
     public String publishBlog(Blog blog, String tagIds, RedirectAttributes attributes, HttpSession session,Model model) {
 

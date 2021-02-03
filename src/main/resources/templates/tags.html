@@ -83,7 +83,7 @@
                             </div>
                             <div class="row">
                                 <div class="column">
-                                    <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui  basic left pointing label m-padded-mini m-text-thin" th:classappend="${tag.id==activeTagId} ? 'teal'" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</a>
+                                    <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui  basic left pointing label m-padded-mini m-text-thin" th:classappend="${tag.id==activeTagId} ? 'orange'" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</a>
                                 </div>
                             </div>
                         </div>
@@ -103,10 +103,11 @@
         <div class="ui bottom attached segment">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <a href="#" class="ui teal basic  mini button">上一页</a>
+                    <div class="item"><a th:href="@{'/tags/'+${activeTagId}(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></div>
+
                 </div>
-                <div class="column right aligned">
-                    <a href="#" class="ui teal basic  mini button">下一页</a>
+                <div class="column right aligned" >
+                    <div class="item"><a th:href="@{'/tags/'+${activeTagId}(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></div>
                 </div>
             </div>
         </div>
