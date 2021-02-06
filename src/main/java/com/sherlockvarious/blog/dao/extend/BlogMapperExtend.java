@@ -15,4 +15,6 @@ public interface BlogMapperExtend {
     List<Blog> sortByTraffic();
 
     List<Blog> selectByYear(int i);
+
+    List<Blog> selectByKeyword(String query);
 }

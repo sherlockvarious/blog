@@ -225,10 +225,45 @@ public class BlogServiceImp implements BlogService {
         return new PageInfo<>(blogs);
     }
 
+
+    //根据关键词查找blog （即搜索框查找相关blog）
+    @Override
+    public PageInfo<Blog> listBlogByKeyword(int pageNum, int pageSize, String query) {
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<Blog> blogs= blogMapper.selectByKeyword(query);
+
+        //初始化blog中的user
+        for (Blog blog : blogs) {
+            blog.setUser(userMapper.selectByPrimaryKey(blog.getUserId()));
+        }
+
+        //初始化blog中的type
+        for (Blog blog : blogs) {
+            blog.setType(typeMapper.selectByPrimaryKey(blog.getTypeId()));
+        }
+
+        //初始化blog中的tag
+        for (Blog blog : blogs) {
+            Blog_TagsExample example = new Blog_TagsExample();
+            example.createCriteria().andBlogIdEqualTo(blog.getId());
+            List<Blog_Tags> blog_tagsList = blog_tagsMapper.selectByExample(example);
+
+
+            List<Tag> tags = new ArrayList<>();
+            for (Blog_Tags blog_tags : blog_tagsList) {
+                tags.add(tagMapper.selectByPrimaryKey(blog_tags.getTagId()));
+            }
+
+            blog.setTags(tags);
+        }
+
+        return new PageInfo<>(blogs);
+    }
+
     @Override
     public PageInfo<Blog> listBlogByTags(int pageNum, int pageSize, int id) {
         PageHelper.startPage(pageNum, pageSize);
-
 
         Blog_TagsExample example = new Blog_TagsExample();
         example.createCriteria().andTagIdEqualTo(id);

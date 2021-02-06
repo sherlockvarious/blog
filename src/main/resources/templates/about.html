@@ -50,20 +50,23 @@
                 <div class="ui attached segment">
                     <p>我真诚地喜欢你，想带你去看每年故宫的初雪，阿拉斯加的海岸线，我愿意与你两人独占一江秋，愿意与你郡亭枕上看潮头，铺着红地毯的礼堂，暮霭沉沉的原野，我都愿与你共享，我想象过和你一起生活，直到白发苍苍垂垂老矣，同枕共穴，至死不休</p>
                 </div>
+
                 <div class="ui attached segment">
-                    <div class="ui orange basic left pointing label m-margin-tb-tiny" >编程</div>
-                    <div class="ui orange basic left pointing label m-margin-tb-tiny">爱情</div>
-                    <div class="ui orange basic left pointing label m-margin-tb-tiny">运动</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" th:text="${tag.name}"></a>
+                    </div>
                 </div>
+
                 <div class="ui attached segment">
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">mysql</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">java</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny" th:each="type : ${types}">
+                        <a href="#" th:href="@{/types/{id}(id=${type.id})}" th:text="${type.name}"></a>
+                    </div>
+
                 </div>
                 <div class="ui bottom attached segment">
                     <a href="https://github.com/sherlockvarious" target="_blank" class="ui github circular icon button " data-content="sherlockvarious"><i class="github icon"></i></a>
-                    <a href="" class="ui wechat circular icon button "><i class="wechat icon"></i></a>
-                    <a href="" class="ui qq circular icon button " ><i class="qq icon"></i></a>
+                    <a href="#" class="ui wechat circular icon button "><i class="wechat icon"></i></a>
+                    <a href="#" class="ui qq circular icon button " ><i class="qq icon"></i></a>
                 </div>
                 <div class="ui wechatQR flowing popup transition hidden">
                     <img src="../static/images/wechatQRcode.png"  th:src="@{/images/wechatQRcode.png}" style="width: 100px" alt="" class="ui rounded image">
@@ -135,12 +138,12 @@
     $('.github').popup();
     $('.qq').popup({
         popup: $('.qqQR.popup'),
-        position: 'bottom center'
+        position: 'top center'
     });
 
     $('.wechat').popup({
         popup: $('.wechatQR.popup'),
-        position: 'bottom center'
+        position: 'top center'
     });
 </script>
 </body>

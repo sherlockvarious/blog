@@ -102,6 +102,17 @@
         <include refid="Blob_Column_List" />
         from t_blog
         where create_time regexp #{id,jdbcType=INTEGER}
-        order by create_time;
+        order by create_time
+    </select>
+
+    <select id="selectByKeyword" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from t_blog
+        where title LIKE "%"#{query,jdbcType=VARCHAR}"%"
+        or content LIKE "%"#{query,jdbcType=VARCHAR}"%"
+        OR description like "%"#{query,jdbcType=VARCHAR}"%"
     </select>
 </mapper>
