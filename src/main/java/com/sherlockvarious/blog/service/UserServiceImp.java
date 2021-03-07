@@ -92,14 +92,22 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean register(User user) {
+    public boolean register(User user, String msg) {
+
+        //判断该邮箱是否注册过
+        UserExample example = new UserExample();
+        example.createCriteria().andEmailEqualTo(user.getEmail());
+        if (userMapper.selectByExample(example).size() != 0) {
+            msg = "请勿重复注册";
+            return false;
+        }
 
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         //初始化头像地址
         String first = "https://picsum.photos/id/";
         String id = Integer.toString(new Random().nextInt(1000));
-        String avator = first+id+"/100/100";
+        String avator = first + id + "/100/100";
 
         user.setAvatar(avator);
 
@@ -107,8 +115,10 @@ public class UserServiceImp implements UserService {
         user.setPassword(pw);
 
         if (userMapper.insertSelective(user) == 1) {
+            msg = "注册成功";
             return true;
         }
+        msg = "注册失败";
         return false;
     }
 

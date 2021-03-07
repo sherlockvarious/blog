@@ -21,7 +21,7 @@ public interface UserService {
 
     public User selectByEmail(String email);
 
-    public boolean register(User user);
+    public boolean register(User user,String msg);
 
     boolean resetPassword(User user);
 }

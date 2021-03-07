@@ -322,4 +322,27 @@ public class BlogServiceImp implements BlogService {
 
         return map;
     }
+
+    @Override
+    public Blog getAndConvert(int id) {
+        Blog it = blogMapper.selectByPrimaryKey(id);
+
+        it.setUser(userMapper.selectByPrimaryKey(it.getUserId()));
+        it.setType(typeMapper.selectByPrimaryKey(it.getTypeId()));
+
+        Blog_TagsExample example = new Blog_TagsExample();
+        example.createCriteria().andBlogIdEqualTo(id);
+        List<Blog_Tags> blog_tagsList = blog_tagsMapper.selectByExample(example);
+
+        List<Tag> tags = new ArrayList<>();
+        for (Blog_Tags blog_tags : blog_tagsList) {
+            tags.add(tagMapper.selectByPrimaryKey(blog_tags.getTagId()));
+        }
+        it.setTags(tags);
+
+        int views = it.getViews();
+        it.setViews(++views);
+
+        return it;
+    }
 }

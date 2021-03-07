@@ -38,4 +38,6 @@ public interface BlogService {
     Map<Integer,List<Blog>> archiveBlog();
 
     PageInfo<Blog> listBlogByKeyword(int pageNum, int pageSize, String query);
+
+    Blog getAndConvert(int id);
 }

@@ -137,13 +137,13 @@
                                 <i class="idea icon"></i>分类
                             </div>
                             <div class="right aligned column">
-                                <a href="#" th:href="@{/page/types}">more<i class="angle double right icon"></i></a>
+                                <a href="#" th:href="@{/types}">more<i class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui teal segment">
                         <div class="ui vertical menu fluid">
-                            <a href="#" class="item" th:each="type : ${types}">
+                            <a href="#" th:href="@{/types/{id}(id=${type.id})}"class="item" th:each="type : ${types}">
                                 <span th:text="${type.name}">学习日志</span>
                                 <div class="ui teal basic left pointing label" th:text="${type.numsOfBlog}"></div>
                             </a>
@@ -240,16 +240,16 @@
 </footer>
 
 
-<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
 
-    $('.ui.dropdown').dropdown({})
-
-    ;
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
 </script>
 </body>
 </html>

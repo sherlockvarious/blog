@@ -91,10 +91,9 @@ public class LoginController {
     @RequestMapping("/register")
     @ResponseBody
     public String userRegister(User user){
-        if(userService.register(user)){
-            return "注册成功";
-        }
+        String msg = "";
 
-        return "注册失败";
+        userService.register(user,msg);
+        return msg;
     }
 }
