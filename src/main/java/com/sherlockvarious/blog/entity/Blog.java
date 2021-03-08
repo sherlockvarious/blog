@@ -2,8 +2,6 @@ package com.sherlockvarious.blog.entity;
 
 import com.sherlockvarious.blog.entity.extend.BlogExtend;
 
-import javax.persistence.Basic;
-import javax.persistence.FetchType;
 import java.util.Date;
 
 public class Blog extends BlogExtend {
@@ -41,14 +39,22 @@ public class Blog extends BlogExtend {
 
     private String tagIds;
 
-
-
     public String getTagIds() {
         return tagIds;
     }
 
     public void setTagIds(String tagIds) {
         this.tagIds = tagIds;
+    }
+
+    private Type type;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Integer getId() {

@@ -11,8 +11,8 @@
         </commentGenerator>
         <!--覆盖生成XML文件-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characeterEncoding=utf-8&amp;serverTimezone=UTC" userId="root"
-                        password="sunchao20000229">
+                        connectionURL="jdbc:mysql://sh-cynosdbmysql-grp-nwivzjqo.sql.tencentcdb.com:26997/blog?serverTimezone=UTC" userId="root"
+                        password="Sunchao20000229">
             <property name="nullCatalogMeansCurrent" value="true"></property>
         </jdbcConnection>
 
@@ -35,8 +35,7 @@
         </javaClientGenerator>
 
 
-<!--        <table tableName="hibernate_sequence" domainObjectName="Address"></table>-->
-<!--        <table tableName="t_blog_tags" domainObjectName="Goods"></table>-->
+
 
 <!--        <table tableName="t_blog" domainObjectName="Blog"></table>-->
 <!--        <table tableName="t_comment" domainObjectName="Comment"></table>-->

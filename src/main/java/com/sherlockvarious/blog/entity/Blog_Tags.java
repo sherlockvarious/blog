@@ -5,9 +5,9 @@ public class Blog_Tags {
 
     private Integer blogId;
 
-    public Blog_Tags(Integer tagId, Integer blogId) {
-        this.tagId = tagId;
-        this.blogId = blogId;
+    public Blog_Tags(Integer tag, Integer id) {
+        tagId =tag;
+        blogId =id;
     }
 
     public Integer getTagId() {

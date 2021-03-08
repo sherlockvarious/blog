@@ -7,6 +7,15 @@ public class Type extends TypeExtend {
 
     private String name;
 
+    private int numsOfBlog;
+
+    public int getNumsOfBlog() {
+        return numsOfBlog;
+    }
+
+    public void setNumsOfBlog(int numsOfBlog) {
+        this.numsOfBlog = numsOfBlog;
+    }
 
     public Integer getId() {
         return id;

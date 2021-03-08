@@ -251,13 +251,13 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sherlockvarious.blog.entity.BlogExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.sherlockvarious.blog.entity.BlogExample" resultType="java.lang.Long" >
     select count(*) from t_blog
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update t_blog
     <set>
       <if test="record.id != null">
@@ -313,7 +313,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
     update t_blog
     set id = #{record.id,jdbcType=INTEGER},
       appreciation = #{record.appreciation,jdbcType=BIT},
